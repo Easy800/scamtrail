@@ -11,6 +11,7 @@ const {
   createAuditLog,
   readP2,
 } = require("../../intake/src");
+const { seedIntakeFixtures, summarizeCampaigns } = require("./seed-fixtures");
 
 function parseCookie(header) {
   const out = {};
@@ -89,6 +90,8 @@ function htmlPage(title, inner) {
   .mono { font-family: ui-monospace, Menlo, monospace; font-size:.82rem; word-break:break-all; }
   nav a { margin-right:.8rem; }
   .warn { font-size:.88rem; color:var(--warn); }
+  .chips { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .chip { border:1px solid var(--line); padding:.45rem .65rem; background:#fbfaf6; font-size:.88rem; }
 </style>
 <body>
   ${inner}
@@ -120,18 +123,27 @@ function dashboardPage(user, state) {
   const err = state.error
     ? `<div class="flash err">${esc(state.error)}</div>`
     : "";
+  const campaigns = state.campaigns || summarizeCampaigns(reports);
+  const campaignCards = campaigns
+    .map(
+      (c) => `<div class="chip"><b>${esc(c.label)}</b><br/>${esc(c.count)} 条 · 自述损失 ${esc(c.loss)} USD</div>`
+    )
+    .join("");
   const reportRows = reports.length
     ? reports
         .map(
           (row) => `<tr>
             <td class="mono">${esc(row.id)}</td>
-            <td>${esc(row.report_type)}</td>
+            <td>${esc(row.title || row.report_type)}</td>
+            <td>${esc(row.country_code || "")}</td>
+            <td>${esc(row.amount_declared != null ? row.currency + " " + row.amount_declared : "—")}</td>
+            <td>${esc((row.indicators || []).join(" · "))}</td>
             <td>${esc(row.status)}</td>
-            <td>${esc(row.submitted_at || "")}</td>
+            <td>${row.public_source ? `<a href="${esc(row.public_source)}" target="_blank" rel="noopener">来源</a>` : "—"}</td>
           </tr>`
         )
         .join("")
-    : `<tr><td colspan="4">还没有投稿。提交后会进入隔离，不会公开。</td></tr>`;
+    : `<tr><td colspan="7">还没有投稿。提交后会进入隔离，不会公开。</td></tr>`;
   const receiptRows = receipts.length
     ? receipts
         .map(
@@ -167,7 +179,11 @@ function dashboardPage(user, state) {
       user,
       `${flash}${err}
       <h1>工作台</h1>
-      <p class="sub">记录不等于报案。投稿先隔离；公开 Case 不会在这一层自动出现。</p>
+      <p class="sub">记录不等于报案。下列种子来自 FTC/FBI/DFPI/Kaspersky 等<strong>公开通报的路径</strong>，已去掉受害人姓名、电话、邮箱和卡号。投稿仍先隔离。</p>
+      <div class="card" style="margin-bottom:1rem">
+        <h2>关联痕迹（工作假设，不是定罪）</h2>
+        <div class="chips">${campaignCards || "<span class='sub'>暂无</span>"}</div>
+      </div>
       <div class="grid">
         <div class="card">
           <h2>提交报告</h2>
@@ -209,7 +225,7 @@ function dashboardPage(user, state) {
         <div class="card">
           <h2>隔离中的报告</h2>
           <table>
-            <thead><tr><th>ID</th><th>类型</th><th>状态</th><th>提交时间</th></tr></thead>
+            <thead><tr><th>ID</th><th>标题</th><th>地区</th><th>自述金额</th><th>痕迹</th><th>状态</th><th>公开来源</th></tr></thead>
             <tbody>${reportRows}</tbody>
           </table>
         </div>
@@ -230,8 +246,12 @@ function createApp(options = {}) {
   const users = options.users;
   const sessions = options.sessions || new Map();
   const audit = options.audit || createAuditLog();
-  const reports = options.reports || [];
-  const receipts = options.receipts || [];
+  const seeded =
+    options.reports || options.receipts
+      ? { reports: options.reports || [], receipts: options.receipts || [] }
+      : seedIntakeFixtures();
+  const reports = seeded.reports;
+  const receipts = seeded.receipts;
 
   function currentUser(headers) {
     const cookies = parseCookie(headers && (headers.cookie || headers.Cookie));
