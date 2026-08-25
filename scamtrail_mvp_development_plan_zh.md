@@ -820,14 +820,14 @@ M5 开始前先补：多人审核的最小权限模型，降低单一站长风�
 
 ### M1
 
-- [ ] 认证与角色
+- [x] 认证与角色
 - [ ] 投稿表单与草稿
-- [ ] Consent
+- [x] Consent
 - [ ] Evidence Vault 全流水
-- [ ] Hash 回执
-- [ ] Audit
-- [ ] Reviewer 看不到 P2 原件
-- [ ] §29.1 夹具通过
+- [x] Hash 回执
+- [x] Audit
+- [x] Reviewer 看不到 P2 原件
+- [x] §29.1 夹具通过
 
 ### M2
 
