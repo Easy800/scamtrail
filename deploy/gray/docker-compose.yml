@@ -1,4 +1,4 @@
-# CA 灰度测试服务器 only. Bind localhost. Not production.
+# CA 灰度测试服务器 only. Not production.
 services:
   db:
     image: postgres:16-alpine
@@ -16,6 +16,22 @@ services:
       interval: 3s
       timeout: 3s
       retries: 20
+
+  web:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: scamtrail-gray-web
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      SCAMTRAIL_OWNER_PASSWORD: gray-owner-change-me
+      SCAMTRAIL_REVIEWER_PASSWORD: gray-reviewer-change-me
+    ports:
+      - "192.168.6.54:13180:3000"
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   scamtrail_gray_pg:

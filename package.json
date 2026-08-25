@@ -4,8 +4,11 @@
   "description": "诈迹 · ScamTrail — living-case scam intelligence. Every scam leaves a trail.",
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "test": "node --test packages/schemas/test/*.test.js packages/intake/test/*.test.js",
+    "test": "node --test packages/schemas/test/*.test.js packages/intake/test/*.test.js packages/platform/test/*.test.js",
     "test:m1": "node --test packages/intake/test/*.test.js",
+    "test:login": "node --test packages/platform/test/*.test.js",
+    "start": "node packages/platform/src/server.js",
+    "login-launch": "node packages/platform/src/login-launch.js",
     "migrate": "node packages/schemas/src/cli/migrate.js",
     "migrate:validate": "node packages/schemas/src/cli/migrate.js validate",
     "migrate:apply": "node packages/schemas/src/cli/migrate.js apply",

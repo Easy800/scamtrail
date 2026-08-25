@@ -17,7 +17,12 @@ npm run migrate:validate
 npm run scan-victim-files
 npm run validate:snapshot -- case --from-spec
 npm run validate:snapshot -- case packages/schemas/fixtures/poisoned-public-case.yaml
+npm run login-launch
+npm start
 ```
+
+Gray login (CA): see `deploy/gray/README.md`. Local default: http://127.0.0.1:3000/login  
+`owner@scamtrail.local` / `gray-owner-change-me`
 
 `--from-spec` loads ST-DEV-001 §34. The poisoned Case must print `"ok": false`.
 
