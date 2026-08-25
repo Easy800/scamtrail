@@ -1,0 +1,74 @@
+{
+  "version": "2026-08-24.v1",
+  "note": "Stable enums. Add values; do not change meaning of existing keys.",
+  "report_type": [
+    "loss",
+    "interaction_no_payment",
+    "observation",
+    "public_research"
+  ],
+  "entry_channel": [
+    "social_bot",
+    "ad",
+    "phone",
+    "telegram",
+    "qq",
+    "website",
+    "in_person",
+    "other"
+  ],
+  "communication_channel": [
+    "telegram",
+    "qq",
+    "x",
+    "phone",
+    "email",
+    "website_chat",
+    "other"
+  ],
+  "payment_method": [
+    "card",
+    "bank_transfer",
+    "crypto",
+    "cash",
+    "third_party_wallet",
+    "other"
+  ],
+  "scam_type": [
+    "investment",
+    "activation_fee",
+    "impersonation_support",
+    "romance",
+    "employment",
+    "other"
+  ],
+  "indicator_type": [
+    "tg_username",
+    "tg_id",
+    "qq",
+    "domain",
+    "url",
+    "wallet",
+    "bot",
+    "image_sha256",
+    "phone_hmac",
+    "email_hmac",
+    "bank_hmac"
+  ],
+  "relationship_type": [
+    "same_indicator",
+    "shared_protected_communication_identifier",
+    "same_file_hash",
+    "candidate_similar_avatar",
+    "candidate_text_template"
+  ],
+  "match_method": [
+    "exact",
+    "normalized_exact",
+    "file_sha256",
+    "hmac_exact",
+    "phash",
+    "embedding",
+    "text_template"
+  ]
+}

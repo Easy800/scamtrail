@@ -1,0 +1,25 @@
+{
+  "$id": "https://scamtrail.dev/schemas/report.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Intake Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "report_type", "status", "submitted_at"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "submitter_id": { "type": "string" },
+    "report_type": {
+      "type": "string",
+      "enum": ["loss", "interaction_no_payment", "observation", "public_research"]
+    },
+    "status": { "type": "string", "minLength": 1 },
+    "country_code": { "type": "string" },
+    "region_generalized": { "type": "string" },
+    "incident_started_at": { "type": "string" },
+    "incident_ended_at": { "type": "string" },
+    "narrative_private": { "type": "string" },
+    "submitted_at": { "type": "string" },
+    "source_channel": { "type": "string" },
+    "duplicate_of_report_id": { "type": ["string", "null"] }
+  }
+}

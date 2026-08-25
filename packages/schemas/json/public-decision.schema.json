@@ -1,0 +1,36 @@
+{
+  "$id": "https://scamtrail.dev/schemas/public-decision.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Public Decision Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "claim_id",
+    "previous_status",
+    "new_status",
+    "public_reason",
+    "decided_at"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^DEC-" },
+    "claim_id": { "type": "string" },
+    "previous_status": { "type": "string" },
+    "new_status": { "type": "string" },
+    "public_reason": { "type": "string", "minLength": 1 },
+    "decided_at": { "type": "string" },
+    "notify_submitter": { "type": "boolean" },
+    "affected_cases": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affected_campaigns": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affected_indicators": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

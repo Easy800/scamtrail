@@ -1,0 +1,24 @@
+{
+  "$id": "https://scamtrail.dev/schemas/public-claim.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Public Claim Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "statement", "status"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^CLM-" },
+    "statement": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "previous_status": { "type": "string" },
+    "current_assessment": { "type": "string" },
+    "supporting_evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "contradicting_evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decision_id": { "type": "string" }
+  }
+}

@@ -1,0 +1,9 @@
+id: DEC-2027-0048
+claim_id: CLM-1002
+previous_status: verified
+new_status: retracted
+public_reason: >
+  新提交的独立证据更有力地支持照片被盗用，现有证据不足以归属给照片中的现实人物。
+decided_at: 2027-03-12T00:00:00Z
+affected_cases:
+  - CASE-2026-000127

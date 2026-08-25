@@ -1,0 +1,273 @@
+openapi: 3.0.3
+info:
+  title: 诈迹 · ScamTrail API (M0 draft)
+  version: 0.10.0
+  description: Four auth domains from ST-DEV-001 §22. P2 routes are owner_privacy only.
+servers:
+  - url: /api
+tags:
+  - name: public-read
+  - name: submitter-write
+  - name: internal-review
+  - name: disclosure
+paths:
+  /public/cases:
+    get:
+      tags: [public-read]
+      operationId: listPublicCases
+      responses:
+        "200": { description: P0 case list }
+  /public/cases/{id}:
+    get:
+      tags: [public-read]
+      operationId: getPublicCase
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: P0 case snapshot }
+  /public/campaigns:
+    get:
+      tags: [public-read]
+      operationId: listPublicCampaigns
+      responses:
+        "200": { description: P0 campaign list }
+  /public/campaigns/{id}:
+    get:
+      tags: [public-read]
+      operationId: getPublicCampaign
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: P0 campaign snapshot }
+  /public/indicators/{id}:
+    get:
+      tags: [public-read]
+      operationId: getPublicIndicator
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Trail first/last seen }
+  /public/search:
+    get:
+      tags: [public-read]
+      operationId: publicSearch
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+      responses:
+        "200": { description: Typed search }
+  /public/methodology:
+    get:
+      tags: [public-read]
+      operationId: getMethodology
+      responses:
+        "200": { description: Methodology }
+  /public/changes:
+    get:
+      tags: [public-read]
+      operationId: listPublicChanges
+      responses:
+        "200": { description: Public changelog }
+  /reports:
+    post:
+      tags: [submitter-write]
+      operationId: createReport
+      responses:
+        "201": { description: Draft report }
+  /reports/{id}:
+    patch:
+      tags: [submitter-write]
+      operationId: patchReport
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Updated }
+  /reports/{id}/payments:
+    post:
+      tags: [submitter-write]
+      operationId: addPayment
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "201": { description: Payment row }
+  /reports/{id}/evidence/init:
+    post:
+      tags: [submitter-write]
+      operationId: initEvidenceUpload
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Short-lived presigned PUT }
+  /reports/{id}/evidence/complete:
+    post:
+      tags: [submitter-write]
+      operationId: completeEvidenceUpload
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Receipt }
+  /reports/{id}/consents:
+    put:
+      tags: [submitter-write]
+      operationId: putConsents
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Versioned consents }
+  /reports/{id}/submit:
+    post:
+      tags: [submitter-write]
+      operationId: submitReport
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "202": { description: Quarantined }
+  /reports/{id}/supplements:
+    post:
+      tags: [submitter-write]
+      operationId: addSupplement
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "201": { description: Supplement }
+  /me/reports/{id}:
+    get:
+      tags: [submitter-write]
+      operationId: getMyReport
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Submitter view }
+  /me/reports/{id}/access-log:
+    get:
+      tags: [submitter-write]
+      operationId: getMyAccessLog
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Simplified access history }
+  /claims/{claimId}/disputes:
+    post:
+      tags: [submitter-write]
+      operationId: openDispute
+      parameters:
+        - { name: claimId, in: path, required: true, schema: { type: string } }
+      responses:
+        "201": { description: Dispute }
+  /disputes/{id}/evidence/init:
+    post:
+      tags: [submitter-write]
+      operationId: initDisputeEvidence
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Presigned PUT }
+  /me/disputes/{id}:
+    get:
+      tags: [submitter-write]
+      operationId: getMyDispute
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Dispute status }
+  /internal/intake:
+    get:
+      tags: [internal-review]
+      operationId: listIntake
+      responses:
+        "200": { description: Quarantine queue }
+  /internal/evidence/{id}/classify:
+    post:
+      tags: [internal-review]
+      operationId: classifyEvidence
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: P0/P1/P2 }
+  /internal/observations:
+    post:
+      tags: [internal-review]
+      operationId: createObservation
+      responses:
+        "201": { description: Observation }
+  /internal/claims:
+    post:
+      tags: [internal-review]
+      operationId: createClaim
+      responses:
+        "201": { description: Claim }
+  /internal/claims/{id}/assessment:
+    post:
+      tags: [internal-review]
+      operationId: assessClaim
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Assessment draft }
+  /internal/relationships:
+    post:
+      tags: [internal-review]
+      operationId: createRelationship
+      responses:
+        "201": { description: Candidate or confirmed }
+  /internal/cases:
+    post:
+      tags: [internal-review]
+      operationId: createCase
+      responses:
+        "201": { description: Case view }
+  /internal/campaigns:
+    post:
+      tags: [internal-review]
+      operationId: createCampaign
+      responses:
+        "201": { description: Campaign }
+  /internal/decisions:
+    post:
+      tags: [internal-review]
+      operationId: publishDecision
+      responses:
+        "201": { description: Append-only Decision }
+  /internal/collective-cases:
+    post:
+      tags: [disclosure]
+      operationId: createCollectiveCase
+      responses:
+        "201": { description: Candidate, not a send }
+  /internal/collective-cases/{id}/consent-snapshot:
+    post:
+      tags: [disclosure]
+      operationId: snapshotConsents
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Consent snapshot }
+  /internal/collective-cases/{id}/packages:
+    post:
+      tags: [disclosure]
+      operationId: buildPackage
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "201": { description: Package draft }
+  /internal/recipients/verify:
+    post:
+      tags: [disclosure]
+      operationId: verifyRecipient
+      responses:
+        "200": { description: Verified recipient }
+  /internal/disclosure-packages/{id}/approve:
+    post:
+      tags: [disclosure]
+      operationId: approvePackage
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Owner approval }
+  /internal/disclosure-packages/{id}/mark-disclosed:
+    post:
+      tags: [disclosure]
+      operationId: markDisclosed
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Requires verified recipient first }

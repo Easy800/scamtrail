@@ -1,0 +1,22 @@
+name: Taxonomy
+description: Propose a new enum value. Do not change the meaning of existing keys.
+title: "[taxonomy] "
+labels: ["taxonomy"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Add values only. Existing keys keep their meaning.
+        Do not upload ID documents, chats, or payment screenshots.
+  - type: input
+    id: enum_name
+    attributes:
+      label: Enum (see packages/taxonomy/enums.json)
+    validations:
+      required: true
+  - type: input
+    id: new_value
+    attributes:
+      label: Proposed value
+    validations:
+      required: true

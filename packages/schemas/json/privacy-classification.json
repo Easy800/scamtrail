@@ -1,0 +1,101 @@
+{
+  "policy_version": "2026-08-24.v1",
+  "classes": ["P0", "P1", "P2"],
+  "fields": [
+    {
+      "field": "loss_amount",
+      "class": "P0",
+      "public": "Original currency; supported vs declared counted separately"
+    },
+    {
+      "field": "approximate_date",
+      "class": "P0",
+      "public": "May coarsen to day or month"
+    },
+    {
+      "field": "scam_channel",
+      "class": "P0",
+      "public": "Public"
+    },
+    {
+      "field": "scam_script_summary",
+      "class": "P0",
+      "public": "Summary only; full chat is P1"
+    },
+    {
+      "field": "full_chat",
+      "class": "P1",
+      "public": "Not public"
+    },
+    {
+      "field": "website_domain",
+      "class": "P0",
+      "public": "Defanged, e.g. example[.]com"
+    },
+    {
+      "field": "telegram_qq_bot",
+      "class": "P0/P1",
+      "public": "After review; may mask characters"
+    },
+    {
+      "field": "avatar",
+      "class": "P0/P1",
+      "public": "Derived image used by the scam persona; not a claim that the photographed person is the operator"
+    },
+    {
+      "field": "wallet_address",
+      "class": "P0/P1",
+      "public": "By risk and evidence"
+    },
+    {
+      "field": "bank_account",
+      "class": "P1/P2",
+      "public": "Never complete"
+    },
+    {
+      "field": "payment_screenshot",
+      "class": "P1/P2",
+      "public": "No original; verification conclusion only"
+    },
+    {
+      "field": "victim_name",
+      "class": "P1/P2",
+      "public": "Not public"
+    },
+    {
+      "field": "phone",
+      "class": "P1/P2",
+      "public": "Not public"
+    },
+    {
+      "field": "email",
+      "class": "P1/P2",
+      "public": "Not public"
+    },
+    {
+      "field": "id_document",
+      "class": "P2",
+      "public": "Not public"
+    },
+    {
+      "field": "exif_device_gps",
+      "class": "P1/P2",
+      "public": "No raw value"
+    },
+    {
+      "field": "file_sha256",
+      "class": "P0",
+      "public": "Allowed if it does not leak sensitive content"
+    },
+    {
+      "field": "storage_key",
+      "class": "P1",
+      "public": "Never on public snapshots"
+    },
+    {
+      "field": "full_card_number",
+      "class": "P2",
+      "public": "Not public"
+    }
+  ]
+}

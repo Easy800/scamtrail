@@ -1,0 +1,26 @@
+id: CASE-2026-000127
+title: "Telegram 小额激活费诈骗"
+status: active_knowledge
+incident:
+  country: US
+  started_at: 2026-07-03
+  ended_at: 2026-07-03
+loss:
+  currency: USD
+  declared: 52
+  supported: 52
+entry_channel: social_bot
+communication_channels:
+  - telegram
+payment_methods:
+  - card
+trust_factors:
+  - large_group_social_proof
+public_claims:
+  - CLM-1001
+last_knowledge_update_at: 2026-08-24T06:20:00Z
+victim_name: "Jane Doe"
+full_card_number: "XXXX-TEST-CARD"
+email: "victim@example.com"
+phone: "+15555550100"
+storage_key: "s3://vault/reports/CASE-2026-000127/card.png"

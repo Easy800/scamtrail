@@ -1,0 +1,12 @@
+id: RPT-2026-000127
+submitter_id: "00000000-0000-4000-8000-000000000001"
+report_type: loss
+status: quarantined
+country_code: US
+region_generalized: US-west
+incident_started_at: 2026-07-03T00:00:00Z
+incident_ended_at: 2026-07-03T00:00:00Z
+narrative_private: "internal only — never exported to public-data"
+submitted_at: 2026-08-01T15:00:00Z
+source_channel: web_form
+duplicate_of_report_id: null

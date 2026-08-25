@@ -1,0 +1,21 @@
+{
+  "$comment": "Keys that must never appear on a public snapshot. ST-DEV-001 §7.2 / §10.",
+  "fields": [
+    "victim_name",
+    "name",
+    "full_card_number",
+    "card_number",
+    "email",
+    "phone",
+    "storage_key",
+    "passport",
+    "id_number",
+    "home_address",
+    "gps",
+    "narrative_private",
+    "private_reason",
+    "private_statement",
+    "email_ciphertext",
+    "raw_value_ciphertext"
+  ]
+}

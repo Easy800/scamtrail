@@ -1,0 +1,51 @@
+{
+  "policy_version": "2026-08-24.v1",
+  "description": "Versioned consent purposes from ST-DEV-001 §10.3. Each key is stored as consents.purpose.",
+  "keys": [
+    {
+      "purpose": "internal_verification",
+      "path": "consent.internal_verification",
+      "default": true
+    },
+    {
+      "purpose": "public_sanitized_case",
+      "path": "consent.public_sanitized_case",
+      "default": true
+    },
+    {
+      "purpose": "cross_case_matching",
+      "path": "consent.cross_case_matching",
+      "default": true
+    },
+    {
+      "purpose": "aggregate_statistics",
+      "path": "consent.aggregate_statistics",
+      "default": true
+    },
+    {
+      "purpose": "collective_case.anonymous_count_and_amount",
+      "path": "consent.collective_case.anonymous_count_and_amount",
+      "default": true
+    },
+    {
+      "purpose": "collective_case.redacted_evidence",
+      "path": "consent.collective_case.redacted_evidence",
+      "default": false
+    },
+    {
+      "purpose": "collective_case.contact_me_if_escalated",
+      "path": "consent.collective_case.contact_me_if_escalated",
+      "default": true
+    },
+    {
+      "purpose": "collective_case.identity_and_contact_disclosure",
+      "path": "consent.collective_case.identity_and_contact_disclosure",
+      "default": false
+    },
+    {
+      "purpose": "research_recontact",
+      "path": "consent.research_recontact",
+      "default": false
+    }
+  ]
+}

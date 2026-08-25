@@ -1,0 +1,52 @@
+{
+  "$id": "https://scamtrail.dev/schemas/public-campaign.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Public Campaign Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "first_observed_at",
+    "last_observed_at",
+    "reports",
+    "losses",
+    "warning"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^CAMPAIGN-" },
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "first_observed_at": { "type": "string" },
+    "last_observed_at": { "type": "string" },
+    "reports": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["independent", "evidence_supported"],
+      "properties": {
+        "independent": { "type": "integer", "minimum": 0 },
+        "evidence_supported": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "losses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported_usd", "declared_additional_usd", "median_usd"],
+      "properties": {
+        "supported_usd": { "type": "number" },
+        "declared_additional_usd": { "type": "number" },
+        "median_usd": { "type": "number" }
+      }
+    },
+    "jurisdictions": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "infrastructure": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "warning": { "type": "string", "minLength": 1 }
+  }
+}

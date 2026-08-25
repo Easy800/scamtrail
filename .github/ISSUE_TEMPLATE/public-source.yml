@@ -1,0 +1,22 @@
+name: Public source
+description: Point at an already-public URL. Do not attach originals.
+title: "[public-source] "
+labels: ["public-source"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Do not upload ID documents, chats, or payment screenshots.
+        禁止在 GitHub 上传身份证、聊天记录或付款截图。
+  - type: input
+    id: url
+    attributes:
+      label: Public URL
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: What this adds
+    validations:
+      required: true

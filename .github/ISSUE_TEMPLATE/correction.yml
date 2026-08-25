@@ -1,0 +1,22 @@
+name: Correction
+description: Suggest a fix to an already published P0 field. PRs are not production facts.
+title: "[correction] "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Do not upload ID documents, chats, or payment screenshots.
+        禁止在 GitHub 上传身份证、聊天记录或付款截图。
+  - type: input
+    id: object_id
+    attributes:
+      label: Public object id (CASE- / CAMPAIGN- / CLM-)
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed P0 wording
+    validations:
+      required: true

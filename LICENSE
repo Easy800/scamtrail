@@ -1,0 +1,8 @@
+SPDX-License-Identifier: AGPL-3.0-or-later
+
+Starting point (legal review still required, ST-DEV-001 §23.5):
+
+- Program code and public JSON Schema: AGPL-3.0-or-later
+- Documentation: CC BY-SA 4.0
+- Desensitized public-data snapshots: ODC-BY or CC BY 4.0 only after P1/P2 exclusion
+- Evidence Vault, HMAC peppers, unreleased reports, and internal investigation notes: not licensed for public use or GitHub upload

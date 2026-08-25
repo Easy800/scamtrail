@@ -1,0 +1,18 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+coverage/
+dist/
+.postgres-data/
+vault-local/
+*.pem
+*.key
+
+# planning-with-files: local working memory, never push
+task_plan.md
+findings.md
+progress.md
+.planning/

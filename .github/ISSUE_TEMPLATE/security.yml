@@ -1,0 +1,17 @@
+name: Security
+description: Do not attach victim files. Prefer a private report (see SECURITY.md).
+title: "[security] "
+labels: ["security"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Do not upload ID documents, chats, or payment screenshots.
+        禁止在 GitHub 上传身份证、聊天记录或付款截图。
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Reproduce without original evidence attachments.
+    validations:
+      required: true

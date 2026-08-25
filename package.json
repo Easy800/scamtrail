@@ -1,0 +1,23 @@
+{
+  "name": "scamtrail",
+  "private": true,
+  "description": "诈迹 · ScamTrail — living-case scam intelligence. Every scam leaves a trail.",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "test": "node --test packages/schemas/test/*.test.js packages/intake/test/*.test.js",
+    "test:m1": "node --test packages/intake/test/*.test.js",
+    "migrate": "node packages/schemas/src/cli/migrate.js",
+    "migrate:validate": "node packages/schemas/src/cli/migrate.js validate",
+    "migrate:apply": "node packages/schemas/src/cli/migrate.js apply",
+    "scan-victim-files": "node packages/schemas/src/cli/scan-victim-files.js",
+    "validate:snapshot": "node packages/schemas/src/cli/validate-snapshot.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.8.1"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$id": "https://scamtrail.dev/schemas/public-case.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Public Case Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "incident",
+    "loss",
+    "entry_channel",
+    "communication_channels",
+    "payment_methods",
+    "public_claims",
+    "last_knowledge_update_at"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^CASE-" },
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "incident": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["country", "started_at"],
+      "properties": {
+        "country": { "type": "string", "minLength": 2 },
+        "started_at": { "type": "string" },
+        "ended_at": { "type": "string" }
+      }
+    },
+    "loss": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currency", "declared", "supported"],
+      "properties": {
+        "currency": { "type": "string", "minLength": 3 },
+        "declared": { "type": "number" },
+        "supported": { "type": "number" }
+      }
+    },
+    "entry_channel": { "type": "string" },
+    "communication_channels": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "payment_methods": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "trust_factors": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "discovery": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "campaign_id": { "type": "string" },
+    "public_claims": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "last_knowledge_update_at": { "type": "string" }
+  }
+}
