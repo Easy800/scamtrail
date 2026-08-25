@@ -1,4 +1,6 @@
 # CA 灰度测试服务器 only. Not production.
+# Project name must NOT be `gray` — that stack already exists on xclis-ca.
+name: scamtrail
 services:
   db:
     image: postgres:16-alpine
