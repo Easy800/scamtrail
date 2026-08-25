@@ -43,6 +43,15 @@ describe("shipped login and session", () => {
     assert.equal(meBody.anonymous, false);
     assert.equal(meBody.user.role, "owner_privacy");
     assert.equal(meBody.email, OWNER_EMAIL);
+    const appPage = app.handle({
+      method: "GET",
+      url: "/app",
+      headers: { cookie: cookieFrom(loginRes) },
+    });
+    assert.equal(appPage.status, 200);
+    assert.match(appPage.body, /提交报告/);
+    assert.match(appPage.body, /证据 Hash 回执/);
+    assert.match(appPage.body, /隔离中的报告/);
   });
 
   it("keeps unauthenticated /me anonymous", () => {
@@ -141,6 +150,36 @@ describe("authenticated intake after login", () => {
     });
     assert.equal(p2deny.status, 403);
     assert.equal(JSON.parse(p2deny.body).error, "P2_FORBIDDEN");
+  });
+
+  it("HTML submit form quarantines a report that then appears on /app", () => {
+    const users = seedUserMap();
+    const app = createApp({ users });
+    const ownerLogin = app.handle({
+      method: "POST",
+      url: "/login",
+      headers: { "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify({ email: OWNER_EMAIL, password: OWNER_PASSWORD }),
+    });
+    const cookie = cookieFrom(ownerLogin);
+    const posted = app.handle({
+      method: "POST",
+      url: "/app/submit",
+      headers: {
+        cookie,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      body: "report_type=loss&country_code=US&narrative_private=synthetic",
+    });
+    assert.equal(posted.status, 302);
+    assert.match(posted.headers.location, /flash=/);
+    const page = app.handle({
+      method: "GET",
+      url: posted.headers.location,
+      headers: { cookie },
+    });
+    assert.match(page.body, /quarantined/);
+    assert.match(page.body, /RPT-/);
   });
 
   it("uses the shipped login() function, not a reimplementation", () => {
